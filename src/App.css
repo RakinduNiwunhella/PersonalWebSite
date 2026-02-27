@@ -1,0 +1,129 @@
+.bullet-rail {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1px;
+  height: 100vh;
+  background: transparent;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.bullet-element {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  pointer-events: none;
+  will-change: transform;
+}
+
+.bullet-body {
+  width: 12px;
+  height: 30px;
+  background: linear-gradient(180deg, #fbbf24 0%, var(--accent-fire) 60%, #991b1b 100%);
+  border-radius: 6px 6px 3px 3px;
+  box-shadow: 0 0 16px var(--accent-fire), 0 0 40px rgba(239, 68, 68, .6);
+}
+
+.bullet-flame {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.flame-particle {
+  border-radius: 50% 50% 20% 20% / 60% 60% 40% 40%;
+  animation: flicker .15s ease-in-out infinite alternate;
+  opacity: .9;
+}
+
+@keyframes flicker {
+  0% {
+    transform: scaleX(1) scaleY(1)
+  }
+
+  100% {
+    transform: scaleX(.8) scaleY(1.2)
+  }
+}
+
+.page-wrap {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding: 0;
+  /* Centered layout, no left padding */
+}
+
+@media (max-width: 768px) {
+  .bullet-rail {
+    display: none;
+  }
+}
+
+/* Base styles for the apple-style content */
+.apple-text {
+  font-size: clamp(3rem, 6vw, 5.5rem);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1.1;
+  text-align: center;
+}
+
+.apple-sub {
+  font-size: clamp(1.25rem, 2vw, 1.75rem);
+  font-weight: 500;
+  color: var(--text-muted);
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+  line-height: 1.5;
+}
+
+/* Override section layout */
+.section {
+  min-height: auto;
+  padding: 8rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  box-shadow: var(--shadow);
+  padding: 3rem;
+  transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease);
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+}
+
+[data-theme='dark'] .card:hover {
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
+}
+
+@keyframes crosshairPulse {
+
+  0%,
+  100% {
+    opacity: 0.7;
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  50% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.4);
+  }
+}
