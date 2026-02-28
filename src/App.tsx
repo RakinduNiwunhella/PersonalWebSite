@@ -17,6 +17,8 @@ import Certificates from './components/Certificates';
 import Competitions from './components/Competitions';
 import Skills from './components/Skills';
 import SkillsTicker from './components/SkillsTicker';
+import BulletStreak from './components/BulletStreak';
+import SectionFX from './components/SectionFX';
 import './App.css';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -338,28 +340,37 @@ export default function App() {
 
         <Hero />
         <PistolSequence />
+        <SectionFX />
 
         <div className="content-tunnel" style={{ position: 'relative', zIndex: 10, paddingBottom: '10rem' }}>
           <About />
           <SectionDivider variant="burst" />
+          <BulletStreak direction="ltr" offsetY={4} />
           <Education />
           <SectionDivider variant="slice" label="What I've Built" />
+          <BulletStreak direction="rtl" delay={0.1} />
           <Projects />
           <SkillsTicker />
           {/* ── Achievements (Certificates + Competitions) ── */}
           <SectionDivider variant="glitch" label="ACHIEVEMENTS" />
+          <BulletStreak direction="ltr" offsetY={-4} delay={0.05} />
           <section id="achievements" style={{ scrollMarginTop: '5rem' }}>
             <Certificates />
             <SectionDivider variant="burst" />
+            <BulletStreak direction="rtl" offsetY={6} />
             <Competitions />
           </section>
           <SectionDivider variant="slice" label="Leading the way" />
+          <BulletStreak direction="ltr" delay={0.08} />
           <Leadership />
           <SectionDivider variant="shockwave" />
+          <BulletStreak direction="rtl" offsetY={-6} delay={0.12} />
           <Sports />
           <SectionDivider variant="shockwave" />
+          <BulletStreak direction="ltr" offsetY={4} />
           <Clubs />
           <SectionDivider variant="glitch" label="COMMUNITY" />
+          <BulletStreak direction="rtl" delay={0.06} />
           <Community />
           <SectionDivider variant="burst" />
           <Skills />
