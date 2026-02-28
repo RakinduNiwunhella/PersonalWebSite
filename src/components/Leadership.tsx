@@ -1,6 +1,7 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { ChevronDown, ChevronUp } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -22,19 +23,82 @@ const roles = [
 
 function ImageCard({ src, alt }: { src: string; alt: string }) {
     return (
-        <div style={{
-            width: '100%',
-            height: 200,
-            borderRadius: 16,
-            overflow: 'hidden',
-            marginBottom: '1rem',
-        }}>
-            <img src={src} alt={alt} style={{
-                width: '100%',
-                height: '100%',
-                objectFit: 'cover',
-                display: 'block',
-            }} />
+        <div style={{ width: '100%', height: 200, borderRadius: 16, overflow: 'hidden', marginBottom: '1rem' }}>
+            <img src={src} alt={alt} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+        </div>
+    );
+}
+
+// A collapsible group used on mobile
+function CollapsibleGroup({
+    label, accentColor, items, renderRow, defaultOpen = false,
+}: {
+    label: string;
+    accentColor: string;
+    items: typeof roles;
+    renderRow: (r: typeof roles[0], i: number) => React.ReactNode;
+    defaultOpen?: boolean;
+}) {
+    const [open, setOpen] = useState(defaultOpen);
+    const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768;
+
+    if (!isMobile) {
+        // On desktop render flat, no toggle
+        return (
+            <>
+                <p style={{ fontSize: '.75rem', fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: accentColor, marginBottom: '.75rem' }}>{label}</p>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(320px, 100%), 1fr))', gap: '1rem', marginBottom: '2rem' }}>
+                    {items.map(renderRow)}
+                </div>
+            </>
+        );
+    }
+
+    return (
+        <div style={{ marginBottom: '1rem' }}>
+            {/* Accordion header */}
+            <button
+                onClick={() => setOpen(v => !v)}
+                style={{
+                    width: '100%',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    padding: '.875rem 1rem',
+                    background: 'var(--bg-card)',
+                    border: '1px solid var(--border)',
+                    borderRadius: open ? '12px 12px 0 0' : 12,
+                    cursor: 'pointer',
+                    fontFamily: 'var(--font)',
+                    transition: 'border-radius .2s',
+                }}
+            >
+                <span style={{ fontSize: '.75rem', fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: accentColor }}>
+                    {label}
+                </span>
+                <span style={{ color: 'var(--text-muted)', display: 'flex', alignItems: 'center' }}>
+                    {open ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+                    <span style={{ fontSize: '.75rem', marginLeft: '.375rem', color: 'var(--text-muted)' }}>
+                        {items.length} items
+                    </span>
+                </span>
+            </button>
+
+            {/* Expandable content */}
+            {open && (
+                <div style={{
+                    border: '1px solid var(--border)',
+                    borderTop: 'none',
+                    borderRadius: '0 0 12px 12px',
+                    padding: '.75rem',
+                    background: 'var(--bg)',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '.75rem',
+                }}>
+                    {items.map(renderRow)}
+                </div>
+            )}
         </div>
     );
 }
@@ -77,23 +141,9 @@ export default function Leadership() {
                     <h2>Leadership</h2>
                 </div>
 
-                {/* Institutional */}
-                <p style={{ fontSize: '.75rem', fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--accent)', marginBottom: '.75rem' }}>Institutional Leadership</p>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(320px, 100%), 1fr))', gap: '1rem', marginBottom: '2rem' }}>
-                    {institutional.map(renderRow)}
-                </div>
-
-                {/* Sports Captaincy */}
-                <p style={{ fontSize: '.75rem', fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--accent-fire)', marginBottom: '.75rem' }}>Sports Captaincy</p>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(320px, 100%), 1fr))', gap: '1rem', marginBottom: '2rem' }}>
-                    {sports.map(renderRow)}
-                </div>
-
-                {/* Club Leadership */}
-                <p style={{ fontSize: '.75rem', fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--accent)', marginBottom: '.75rem' }}>Club & Society Leadership</p>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '1rem' }}>
-                    {clubLeadership.map(renderRow)}
-                </div>
+                <CollapsibleGroup label="Institutional Leadership" accentColor="var(--accent)" items={institutional} renderRow={renderRow} defaultOpen={true} />
+                <CollapsibleGroup label="Sports Captaincy" accentColor="var(--accent-fire)" items={sports} renderRow={renderRow} defaultOpen={true} />
+                <CollapsibleGroup label="Club & Society Leadership" accentColor="var(--accent)" items={clubLeadership} renderRow={renderRow} />
             </div>
         </section>
     );

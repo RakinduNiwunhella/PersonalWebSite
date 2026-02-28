@@ -1,6 +1,7 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { ChevronDown, ChevronUp } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -68,6 +69,9 @@ const clubs: ClubEntry[] = [
 
 export default function Clubs() {
     const ref = useRef<HTMLElement>(null);
+    const [leadershipOpen, setLeadershipOpen] = useState(false);
+    const [showAllMembers, setShowAllMembers] = useState(false);
+    const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768;
 
     useEffect(() => {
         const ctx = gsap.context(() => {
@@ -114,40 +118,122 @@ export default function Clubs() {
                 </div>
 
                 {/* Leadership Clubs */}
-                <p style={{ fontSize: '.75rem', fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--accent)', marginBottom: '.75rem' }}>Leadership Roles</p>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(320px, 100%), 1fr))', gap: '1.25rem', marginBottom: '2.5rem' }}>
-                    {leadershipClubs.map((c, i) => (
-                        <div key={i} className="club-card card">
-                            <h3 style={{ fontSize: '1rem', fontWeight: 700, marginBottom: '.75rem' }}>{c.name}</h3>
-                            <div style={{ display: 'flex', flexDirection: 'column', gap: '.5rem' }}>
-                                {c.highlights.map((h, j) => (
-                                    <div key={j} style={{ borderLeft: `2px solid ${h.role !== 'Member' ? 'var(--accent-fire)' : 'var(--border)'}`, paddingLeft: '.75rem' }}>
-                                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                                            <span style={{ fontSize: '.875rem', fontWeight: 600 }}>{h.role}</span>
-                                            <span style={{ fontSize: '.75rem', color: 'var(--text-muted)', fontWeight: 500 }}>{h.year}</span>
+                {isMobile ? (
+                    // Accordion on mobile
+                    <div style={{ marginBottom: '2rem' }}>
+                        <button
+                            onClick={() => setLeadershipOpen(v => !v)}
+                            style={{
+                                width: '100%',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'space-between',
+                                padding: '.875rem 1rem',
+                                background: 'var(--bg-card)',
+                                border: '1px solid var(--border)',
+                                borderRadius: leadershipOpen ? '12px 12px 0 0' : 12,
+                                cursor: 'pointer',
+                                fontFamily: 'var(--font)',
+                            }}
+                        >
+                            <span style={{ fontSize: '.75rem', fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--accent)' }}>Leadership Roles</span>
+                            <span style={{ display: 'flex', alignItems: 'center', gap: '.375rem', fontSize: '.75rem', color: 'var(--text-muted)' }}>
+                                {leadershipOpen ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+                                {leadershipClubs.length} clubs
+                            </span>
+                        </button>
+                        {leadershipOpen && (
+                            <div style={{
+                                border: '1px solid var(--border)', borderTop: 'none',
+                                borderRadius: '0 0 12px 12px', padding: '.75rem',
+                                background: 'var(--bg)', display: 'flex', flexDirection: 'column', gap: '.75rem',
+                            }}>
+                                {leadershipClubs.map((c, i) => (
+                                    <div key={i} className="club-card card">
+                                        <h3 style={{ fontSize: '1rem', fontWeight: 700, marginBottom: '.75rem' }}>{c.name}</h3>
+                                        <div style={{ display: 'flex', flexDirection: 'column', gap: '.5rem' }}>
+                                            {c.highlights.map((h, j) => (
+                                                <div key={j} style={{ borderLeft: `2px solid ${h.role !== 'Member' ? 'var(--accent-fire)' : 'var(--border)'}`, paddingLeft: '.75rem' }}>
+                                                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                                        <span style={{ fontSize: '.875rem', fontWeight: 600 }}>{h.role}</span>
+                                                        <span style={{ fontSize: '.75rem', color: 'var(--text-muted)', fontWeight: 500 }}>{h.year}</span>
+                                                    </div>
+                                                    {h.projects && (
+                                                        <p style={{ fontSize: '.8125rem', color: 'var(--text-muted)', marginTop: '.2rem', lineHeight: 1.5 }}>
+                                                            Projects: {h.projects}
+                                                        </p>
+                                                    )}
+                                                </div>
+                                            ))}
                                         </div>
-                                        {h.projects && (
-                                            <p style={{ fontSize: '.8125rem', color: 'var(--text-muted)', marginTop: '.2rem', lineHeight: 1.5 }}>
-                                                Projects: {h.projects}
-                                            </p>
-                                        )}
                                     </div>
                                 ))}
                             </div>
+                        )}
+                    </div>
+                ) : (
+                    // Flat grid on desktop
+                    <>
+                        <p style={{ fontSize: '.75rem', fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--accent)', marginBottom: '.75rem' }}>Leadership Roles</p>
+                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(320px, 100%), 1fr))', gap: '1.25rem', marginBottom: '2.5rem' }}>
+                            {leadershipClubs.map((c, i) => (
+                                <div key={i} className="club-card card">
+                                    <h3 style={{ fontSize: '1rem', fontWeight: 700, marginBottom: '.75rem' }}>{c.name}</h3>
+                                    <div style={{ display: 'flex', flexDirection: 'column', gap: '.5rem' }}>
+                                        {c.highlights.map((h, j) => (
+                                            <div key={j} style={{ borderLeft: `2px solid ${h.role !== 'Member' ? 'var(--accent-fire)' : 'var(--border)'}`, paddingLeft: '.75rem' }}>
+                                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                                    <span style={{ fontSize: '.875rem', fontWeight: 600 }}>{h.role}</span>
+                                                    <span style={{ fontSize: '.75rem', color: 'var(--text-muted)', fontWeight: 500 }}>{h.year}</span>
+                                                </div>
+                                                {h.projects && (
+                                                    <p style={{ fontSize: '.8125rem', color: 'var(--text-muted)', marginTop: '.2rem', lineHeight: 1.5 }}>
+                                                        Projects: {h.projects}
+                                                    </p>
+                                                )}
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            ))}
                         </div>
-                    ))}
-                </div>
+                    </>
+                )}
 
                 {/* Membership */}
                 <p style={{ fontSize: '.75rem', fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--text-muted)', marginBottom: '.75rem' }}>Memberships</p>
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: '.75rem' }}>
-                    {memberClubs.map((c, i) => (
+                    {(isMobile && !showAllMembers ? memberClubs.slice(0, 3) : memberClubs).map((c, i) => (
                         <div key={i} className="club-card card" style={{ padding: '1rem 1.5rem', display: 'flex', flexDirection: 'column', gap: '.2rem' }}>
                             <span style={{ fontSize: '.9375rem', fontWeight: 600 }}>{c.name}</span>
                             <span style={{ fontSize: '.8125rem', color: 'var(--text-muted)' }}>{c.highlights.map(h => h.year).join(', ')}</span>
                         </div>
                     ))}
                 </div>
+                {isMobile && memberClubs.length > 3 && (
+                    <button
+                        onClick={() => setShowAllMembers(v => !v)}
+                        style={{
+                            marginTop: '1rem',
+                            width: '100%',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            gap: '.5rem',
+                            padding: '.875rem',
+                            background: 'var(--bg-card)',
+                            border: '1px solid var(--border)',
+                            borderRadius: 12,
+                            cursor: 'pointer',
+                            color: 'var(--text-muted)',
+                            fontSize: '.875rem',
+                            fontWeight: 600,
+                            fontFamily: 'var(--font)',
+                        }}
+                    >
+                        {showAllMembers ? <><ChevronUp size={16} /> Show less</> : <><ChevronDown size={16} /> Show {memberClubs.length - 3} more memberships</>}
+                    </button>
+                )}
             </div>
         </section>
     );

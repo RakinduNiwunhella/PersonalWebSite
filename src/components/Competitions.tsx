@@ -1,7 +1,7 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Trophy } from 'lucide-react';
+import { Trophy, ChevronDown, ChevronUp } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -17,8 +17,11 @@ const comps = [
     { title: '2nd Place — 5th Navy Open Shooting Championship (Youth)', org: 'Sri Lanka Navy', year: '2018', desc: 'Silver medal in the youth division of the national Navy Open.' },
 ];
 
+const MOBILE_PREVIEW = 3;
+
 export default function Competitions() {
     const ref = useRef<HTMLElement>(null);
+    const [showAll, setShowAll] = useState(false);
 
     useEffect(() => {
         gsap.fromTo('.comp-row',
@@ -29,6 +32,10 @@ export default function Competitions() {
             }
         );
     }, []);
+
+    const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768;
+    const visible = (!isMobile || showAll) ? comps : comps.slice(0, MOBILE_PREVIEW);
+    const hidden = comps.length - MOBILE_PREVIEW;
 
     return (
         <section className="section" id="competitions" ref={ref}>
@@ -57,7 +64,7 @@ export default function Competitions() {
                 </div>
 
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                    {comps.map((c, i) => (
+                    {visible.map((c, i) => (
                         <div key={i} className="comp-row card" style={{ display: 'flex', alignItems: 'flex-start', gap: '1.5rem' }}>
                             <Trophy size={20} color="var(--accent-fire)" style={{ flexShrink: 0, marginTop: '.2rem' }} />
                             <div style={{ flex: 1 }}>
@@ -71,6 +78,38 @@ export default function Competitions() {
                         </div>
                     ))}
                 </div>
+
+                {/* Show More / Less — mobile only */}
+                {isMobile && (
+                    <button
+                        onClick={() => setShowAll(v => !v)}
+                        style={{
+                            marginTop: '1.25rem',
+                            width: '100%',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            gap: '.5rem',
+                            padding: '.875rem',
+                            background: 'var(--bg-card)',
+                            border: '1px solid var(--border)',
+                            borderRadius: 12,
+                            cursor: 'pointer',
+                            color: 'var(--accent)',
+                            fontSize: '.875rem',
+                            fontWeight: 600,
+                            fontFamily: 'var(--font)',
+                            letterSpacing: '.02em',
+                            transition: 'background .2s',
+                        }}
+                    >
+                        {showAll ? (
+                            <><ChevronUp size={16} /> Show less</>
+                        ) : (
+                            <><ChevronDown size={16} /> Show {hidden} more competitions</>
+                        )}
+                    </button>
+                )}
             </div>
         </section>
     );
