@@ -16,6 +16,7 @@ import Community from './components/Community';
 import Certificates from './components/Certificates';
 import Competitions from './components/Competitions';
 import Skills from './components/Skills';
+import SkillsTicker from './components/SkillsTicker';
 import './App.css';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -69,6 +70,7 @@ function FloatParticle({ x, y, size, speed, color }: { x: string; y: string; siz
 
 export default function App() {
   const [theme, setTheme] = useState<'dark' | 'light'>('dark');
+  const [pastHero, setPastHero] = useState(false);
   const crosshairRef = useRef<HTMLDivElement>(null);
   const tracerRef = useRef<HTMLDivElement>(null);
   const tracerGlowRef = useRef<HTMLDivElement>(null);
@@ -79,6 +81,15 @@ export default function App() {
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
   }, [theme]);
+
+  // Hide nav logo until user scrolls past the hero section
+  useEffect(() => {
+    const heroHeight = window.innerHeight; // hero is 100vh
+    const onScroll = () => setPastHero(window.scrollY > heroHeight * 0.85);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   useEffect(() => {
     let rafId: number;
@@ -274,10 +285,22 @@ export default function App() {
 
       {/* ── Navbar ── */}
       <nav className="navbar" style={{ mixBlendMode: 'difference', color: '#fff', border: 'none', background: 'transparent', backdropFilter: 'none', WebkitBackdropFilter: 'none' }}>
-        <span className="nav-logo" style={{ color: '#fff' }}>Rakindu Niwunhella</span>
+        <span
+          className="nav-logo"
+          style={{
+            color: '#fff',
+            opacity: pastHero ? 1 : 0,
+            transform: pastHero ? 'translateY(0)' : 'translateY(-8px)',
+            transition: 'opacity 0.4s ease, transform 0.4s ease',
+            pointerEvents: pastHero ? 'auto' : 'none',
+          }}
+        >
+          Rakindu Niwunhella
+        </span>
         <div className="nav-links">
           <a href="#about" style={{ color: '#ccc' }}>About</a>
-          <a href="#projects" style={{ color: '#ccc' }}>Work</a>
+          <a href="#projects" style={{ color: '#ccc' }}>Projects</a>
+          <a href="#achievements" style={{ color: '#ccc' }}>Achievements</a>
           <a href="#sports" style={{ color: '#ccc' }}>Shooting</a>
           <a href="#leadership" style={{ color: '#ccc' }}>Leadership</a>
           <a href="#clubs" style={{ color: '#ccc' }}>Clubs</a>
@@ -322,14 +345,18 @@ export default function App() {
           <Education />
           <SectionDivider variant="slice" label="What I've Built" />
           <Projects />
-          <SectionDivider variant="shockwave" />
-          <Sports />
+          <SkillsTicker />
+          {/* ── Achievements (Certificates + Competitions) ── */}
           <SectionDivider variant="glitch" label="ACHIEVEMENTS" />
-          <Certificates />
-          <SectionDivider variant="burst" />
-          <Competitions />
+          <section id="achievements" style={{ scrollMarginTop: '5rem' }}>
+            <Certificates />
+            <SectionDivider variant="burst" />
+            <Competitions />
+          </section>
           <SectionDivider variant="slice" label="Leading the way" />
           <Leadership />
+          <SectionDivider variant="shockwave" />
+          <Sports />
           <SectionDivider variant="shockwave" />
           <Clubs />
           <SectionDivider variant="glitch" label="COMMUNITY" />
