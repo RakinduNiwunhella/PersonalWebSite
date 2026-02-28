@@ -55,7 +55,7 @@ export default function Sports() {
                 {/* Hero image banner */}
                 <div className="sport-block" style={{
                     width: '100%',
-                    height: 300,
+                    height: 'clamp(180px, 40vw, 300px)',
                     borderRadius: 24,
                     overflow: 'hidden',
                     marginBottom: '1.5rem',
@@ -75,7 +75,7 @@ export default function Sports() {
                 </div>
 
                 {/* Colours + Team in a 2-col layout */}
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(360px, 1fr))', gap: '1.25rem', marginBottom: '1.5rem' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(360px, 100%), 1fr))', gap: '1.25rem', marginBottom: '1.5rem' }}>
                     {/* Colours */}
                     <div className="sport-block card">
                         <div style={{ display: 'flex', alignItems: 'center', gap: '.75rem', marginBottom: '1rem' }}>

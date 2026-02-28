@@ -122,7 +122,7 @@ a {
 
 @media (max-width: 768px) {
   :root {
-    --pad-x: 1.5rem;
+    --pad-x: 1.25rem;
   }
 
   .bullet-rail {
@@ -137,6 +137,120 @@ a {
     display: none !important;
   }
 }
+
+/* ─────────────────────────────────────────────
+   Device-class breakpoints (flagship phones)
+   Devices targeted:
+   ≤430px : iPhone 14/15/16 Plus & Pro Max, Galaxy S Ultra
+   ≤412px : Galaxy S20/21/22/23/24+, Z Fold (folded)
+   ≤393px : iPhone 14/15/16 Pro, iPhone 14 baseline
+   ≤390px : iPhone 12/13/14 standard
+   ≤375px : iPhone 11 / older flagships
+   ≤360px : Galaxy S20/21/22/23/24 standard, iPhone mini
+───────────────────────────────────────────── */
+
+/* ── iPhone 14/15/16 Plus / Pro Max, Galaxy Ultra (≤430px) ── */
+@media (max-width: 430px) {
+  :root {
+    --pad-x: 1.25rem;
+  }
+
+  .navbar {
+    /* Respect Dynamic Island / punch-hole safe area at the top */
+    padding-top: max(1rem, env(safe-area-inset-top, 1rem));
+    padding-left: max(1.25rem, env(safe-area-inset-left, 1.25rem));
+    padding-right: max(1.25rem, env(safe-area-inset-right, 1.25rem));
+  }
+
+  .section {
+    /* Bottom home indicator safe area */
+    padding-bottom: max(4rem, calc(4rem + env(safe-area-inset-bottom, 0px)));
+  }
+}
+
+/* ── Galaxy S+/Z series, standard Samsungs (≤412px) ── */
+@media (max-width: 412px) {
+  :root {
+    --pad-x: 1.1rem;
+  }
+
+  .nav-links {
+    gap: 1rem;
+    font-size: .8rem;
+  }
+
+  .nav-logo {
+    font-size: 1.1rem;
+  }
+}
+
+/* ── iPhone 14 Pro / 15 / 16 baseline (≤393px) ── */
+@media (max-width: 393px) {
+  :root {
+    --pad-x: 1rem;
+  }
+
+  .section-label h2 {
+    font-size: 1.375rem;
+  }
+
+  .nav-links a {
+    font-size: .8rem;
+  }
+}
+
+/* ── iPhone 12/13 standard (≤390px) ── */
+@media (max-width: 390px) {
+  /* Handled by 393px block above — similar sizing */
+}
+
+/* ── Galaxy S20/21/22/23/24 standard, iPhone mini (≤360px) ── */
+@media (max-width: 360px) {
+  :root {
+    --pad-x: 0.875rem;
+  }
+
+  .nav-logo {
+    font-size: 1rem;
+    letter-spacing: -.02em;
+  }
+
+  .nav-links {
+    gap: 0.875rem;
+  }
+
+  .nav-links a {
+    font-size: .75rem;
+  }
+
+  .section-label h2 {
+    font-size: 1.25rem;
+  }
+
+  .card {
+    border-radius: 12px;
+  }
+
+  .tag {
+    font-size: .6875rem;
+    padding: .2rem .45rem;
+  }
+}
+
+/* ── Safe area padding for notched/island/hole-punch phones ── */
+/* Applied globally to fixed elements that sit at screen edges   */
+@supports (padding: env(safe-area-inset-top)) {
+  .navbar {
+    padding-left: max(1.5rem, env(safe-area-inset-left));
+    padding-right: max(1.5rem, env(safe-area-inset-right));
+  }
+
+  /* Progress bar on right edge */
+  [style*="right: 0"][style*="position: fixed"] {
+    right: env(safe-area-inset-right, 0px);
+  }
+}
+
 
 /* ─── Navbar ─── */
 .navbar {
@@ -234,7 +348,7 @@ a {
 
 @media (max-width: 768px) {
   .section {
-    padding: 6rem 1.5rem;
+    padding: 4rem 1.5rem;
   }
 }
 
@@ -279,4 +393,14 @@ a {
   font-weight: 700;
   letter-spacing: -.03em;
   color: var(--text);
+}
+
+@media (max-width: 768px) {
+  .section-label {
+    margin-bottom: 2rem;
+  }
+
+  .section-label h2 {
+    font-size: 1.5rem;
+  }
 }

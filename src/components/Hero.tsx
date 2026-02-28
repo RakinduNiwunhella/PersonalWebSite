@@ -19,11 +19,11 @@ export default function Hero() {
             <div className="hero-content">
 
                 {/* Text Content */}
-                <div style={{ flex: 1, minWidth: 300 }}>
+                <div style={{ flex: 1, minWidth: 0 }}>
                     <h1 className="apple-text hero-text-anim" style={{ marginBottom: '1.5rem', color: 'var(--text)', textAlign: 'left' }}>
                         Rakindu Niwunhella.
                     </h1>
-                    <h2 className="apple-text hero-text-anim" style={{ color: 'var(--text-muted)', marginBottom: '3rem', textAlign: 'left', fontSize: 'clamp(2rem, 4vw, 3.5rem)' }}>
+                    <h2 className="apple-text hero-text-anim" style={{ color: 'var(--text-muted)', marginBottom: '3rem', textAlign: 'left', fontSize: 'clamp(1.5rem, 4vw, 3.5rem)' }}>
                         Code. Precision. Impact.
                     </h2>
                     <p className="apple-sub hero-text-anim" style={{ textAlign: 'left', margin: 0 }}>
@@ -35,6 +35,7 @@ export default function Hero() {
                 {/* Profile Picture */}
                 <div className="hero-text-anim" style={{
                     flex: '0 1 400px',
+                    minWidth: 'min(100%, 280px)',
                     display: 'flex',
                     justifyContent: 'center',
                     position: 'relative'

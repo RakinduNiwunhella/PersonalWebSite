@@ -338,7 +338,7 @@ export default function App() {
           <Skills />
         </div>
 
-        <footer style={{ padding: '6rem 0', textAlign: 'center', borderTop: '1px solid var(--border)', color: 'var(--text-muted)', fontSize: '1rem', fontWeight: 500 }}>
+        <footer style={{ padding: 'clamp(3rem, 8vw, 6rem) 0', textAlign: 'center', borderTop: '1px solid var(--border)', color: 'var(--text-muted)', fontSize: '1rem', fontWeight: 500 }}>
           <p>Rakindu Niwunhella © {new Date().getFullYear()}</p>
         </footer>
       </div>

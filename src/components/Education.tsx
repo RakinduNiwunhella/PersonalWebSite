@@ -82,7 +82,7 @@ export default function Education() {
                             </div>
 
                             {e.marks.length > 0 && (
-                                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(170px, 1fr))', gap: '.5rem 1.5rem' }}>
+                                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(170px, 100%), 1fr))', gap: '.5rem 1.5rem' }}>
                                     {e.marks.map(([mod, score]) => (
                                         <div key={mod} style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid var(--border)', paddingBottom: '.35rem' }}>
                                             <span style={{ fontSize: '.875rem', color: 'var(--text-muted)' }}>{mod}</span>

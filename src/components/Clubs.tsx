@@ -94,7 +94,7 @@ export default function Clubs() {
                 {/* Club Activities banner */}
                 <div className="club-card" style={{
                     width: '100%',
-                    height: 220,
+                    height: 'clamp(140px, 35vw, 220px)',
                     borderRadius: 24,
                     overflow: 'hidden',
                     marginBottom: '2rem',
@@ -115,7 +115,7 @@ export default function Clubs() {
 
                 {/* Leadership Clubs */}
                 <p style={{ fontSize: '.75rem', fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--accent)', marginBottom: '.75rem' }}>Leadership Roles</p>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '1.25rem', marginBottom: '2.5rem' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(320px, 100%), 1fr))', gap: '1.25rem', marginBottom: '2.5rem' }}>
                     {leadershipClubs.map((c, i) => (
                         <div key={i} className="club-card card">
                             <h3 style={{ fontSize: '1rem', fontWeight: 700, marginBottom: '.75rem' }}>{c.name}</h3>

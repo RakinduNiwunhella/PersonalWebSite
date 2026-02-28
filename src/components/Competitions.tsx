@@ -47,7 +47,7 @@ export default function Competitions() {
                     <div className="comp-row" style={{
                         borderRadius: 16,
                         overflow: 'hidden',
-                        height: 160,
+                        height: 'clamp(120px, 30vw, 160px)',
                         gridColumn: 'span 2',
                     }}>
                         <img src="/demo-trophy.png" alt="Competition Trophies" style={{

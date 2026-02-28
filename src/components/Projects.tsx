@@ -39,17 +39,28 @@ export default function Projects() {
                         <div
                             key={p.num}
                             className="proj-row card"
-                            style={{ display: 'grid', gridTemplateColumns: '56px 1fr 1fr auto', gap: '2rem', alignItems: 'center', marginBottom: '1rem', transition: 'transform .2s', cursor: 'default' }}
+                            style={{
+                                display: 'flex',
+                                flexDirection: 'column',
+                                gap: '.75rem',
+                                marginBottom: '1rem',
+                                transition: 'transform .2s',
+                                cursor: 'default',
+                            }}
                             onMouseEnter={e => (e.currentTarget.style.transform = 'translateX(6px)')}
                             onMouseLeave={e => (e.currentTarget.style.transform = 'none')}
                         >
-                            <span style={{ fontSize: '.875rem', fontWeight: 700, color: 'var(--text-muted)', fontVariantNumeric: 'tabular-nums' }}>{p.num}</span>
-                            <div>
-                                <h3 style={{ fontSize: '1.0625rem', fontWeight: 600, marginBottom: '.25rem' }}>{p.title}</h3>
-                                <p style={{ fontSize: '.8125rem', color: 'var(--accent)', fontWeight: 500 }}>{p.stack}</p>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '1rem' }}>
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                                    <span style={{ fontSize: '.875rem', fontWeight: 700, color: 'var(--text-muted)', fontVariantNumeric: 'tabular-nums', flexShrink: 0 }}>{p.num}</span>
+                                    <div>
+                                        <h3 style={{ fontSize: '1.0625rem', fontWeight: 600, marginBottom: '.25rem' }}>{p.title}</h3>
+                                        <p style={{ fontSize: '.8125rem', color: 'var(--accent)', fontWeight: 500 }}>{p.stack}</p>
+                                    </div>
+                                </div>
+                                <span className="tag" style={{ flexShrink: 0 }}>{p.year}</span>
                             </div>
                             <p style={{ fontSize: '.9375rem', color: 'var(--text-muted)', lineHeight: 1.5 }}>{p.desc}</p>
-                            <span className="tag">{p.year}</span>
                         </div>
                     ))}
                 </div>

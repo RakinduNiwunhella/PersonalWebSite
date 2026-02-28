@@ -59,80 +59,82 @@ export default function BulletSequence() {
     }, []);
 
     return (
-        <section ref={sectionRef} style={{
-            height: '100vh',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            position: 'relative',
-        }}>
-
-            <h1 ref={textRef} style={{
-                position: 'absolute',
-                top: '50%',
-                left: '50%',
-                transform: 'translate(-50%, -50%)',
-                zIndex: 0,
-                opacity: 0.06,
-                fontSize: 'clamp(4rem, 15vw, 12rem)',
-                fontWeight: 900,
-                whiteSpace: 'nowrap',
-                margin: 0,
-                lineHeight: 0.85,
-                pointerEvents: 'none',
-                color: 'var(--text)',
-                letterSpacing: '-0.04em'
-            }}>
-                PRECISION
-            </h1>
-
-            <div style={{
-                position: 'relative',
-                zIndex: 10,
+        <div className="desktop-only">
+            <section ref={sectionRef} style={{
+                height: '100vh',
                 display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center'
+                alignItems: 'center',
+                justifyContent: 'center',
+                position: 'relative',
             }}>
-                {/* The CSS Pellet */}
-                <div
-                    ref={pelletRef}
-                    style={{
-                        height: '18vh',
-                        width: '7vh',
-                        borderRadius: '8% 8% 50% 50% / 10% 10% 40% 40%',
-                        background: 'linear-gradient(90deg, #555 0%, #aaa 30%, #eee 50%, #aaa 70%, #555 100%)',
-                        boxShadow: '0 0 30px rgba(0,102,204,0.15), inset 0 8px 16px rgba(255,255,255,0.6), inset 0 -8px 20px rgba(0,0,0,0.6)',
-                        position: 'relative',
-                        willChange: 'transform',
-                        transformOrigin: 'center center'
-                    }}
-                >
-                    {/* Ridges near the flat top (base of the bullet) */}
-                    <div style={{ position: 'absolute', top: '12%', left: '5%', right: '5%', height: 3, background: 'rgba(0,0,0,0.3)', borderRadius: 2 }} />
-                    <div style={{ position: 'absolute', top: '22%', left: '5%', right: '5%', height: 3, background: 'rgba(0,0,0,0.3)', borderRadius: 2 }} />
-                    <div style={{ position: 'absolute', top: '32%', left: '5%', right: '5%', height: 3, background: 'rgba(0,0,0,0.3)', borderRadius: 2 }} />
+
+                <h1 ref={textRef} style={{
+                    position: 'absolute',
+                    top: '50%',
+                    left: '50%',
+                    transform: 'translate(-50%, -50%)',
+                    zIndex: 0,
+                    opacity: 0.06,
+                    fontSize: 'clamp(4rem, 15vw, 12rem)',
+                    fontWeight: 900,
+                    whiteSpace: 'nowrap',
+                    margin: 0,
+                    lineHeight: 0.85,
+                    pointerEvents: 'none',
+                    color: 'var(--text)',
+                    letterSpacing: '-0.04em'
+                }}>
+                    PRECISION
+                </h1>
+
+                <div style={{
+                    position: 'relative',
+                    zIndex: 10,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center'
+                }}>
+                    {/* The CSS Pellet */}
+                    <div
+                        ref={pelletRef}
+                        style={{
+                            height: '18vh',
+                            width: '7vh',
+                            borderRadius: '8% 8% 50% 50% / 10% 10% 40% 40%',
+                            background: 'linear-gradient(90deg, #555 0%, #aaa 30%, #eee 50%, #aaa 70%, #555 100%)',
+                            boxShadow: '0 0 30px rgba(0,102,204,0.15), inset 0 8px 16px rgba(255,255,255,0.6), inset 0 -8px 20px rgba(0,0,0,0.6)',
+                            position: 'relative',
+                            willChange: 'transform',
+                            transformOrigin: 'center center'
+                        }}
+                    >
+                        {/* Ridges near the flat top (base of the bullet) */}
+                        <div style={{ position: 'absolute', top: '12%', left: '5%', right: '5%', height: 3, background: 'rgba(0,0,0,0.3)', borderRadius: 2 }} />
+                        <div style={{ position: 'absolute', top: '22%', left: '5%', right: '5%', height: 3, background: 'rgba(0,0,0,0.3)', borderRadius: 2 }} />
+                        <div style={{ position: 'absolute', top: '32%', left: '5%', right: '5%', height: 3, background: 'rgba(0,0,0,0.3)', borderRadius: 2 }} />
+                    </div>
+
+                    {/* Glow behind the pellet that intensifies as it morphs */}
+                    <div
+                        ref={glowRef}
+                        style={{
+                            position: 'absolute',
+                            top: '50%',
+                            left: '50%',
+                            transform: 'translate(-50%, -50%)',
+                            width: '6vh',
+                            height: '6vh',
+                            borderRadius: '50%',
+                            background: 'radial-gradient(circle, rgba(239,68,68,0.9) 0%, rgba(251,191,36,0.4) 40%, transparent 70%)',
+                            opacity: 0,
+                            filter: 'blur(8px)',
+                            pointerEvents: 'none',
+                            willChange: 'transform, opacity'
+                        }}
+                    />
                 </div>
 
-                {/* Glow behind the pellet that intensifies as it morphs */}
-                <div
-                    ref={glowRef}
-                    style={{
-                        position: 'absolute',
-                        top: '50%',
-                        left: '50%',
-                        transform: 'translate(-50%, -50%)',
-                        width: '6vh',
-                        height: '6vh',
-                        borderRadius: '50%',
-                        background: 'radial-gradient(circle, rgba(239,68,68,0.9) 0%, rgba(251,191,36,0.4) 40%, transparent 70%)',
-                        opacity: 0,
-                        filter: 'blur(8px)',
-                        pointerEvents: 'none',
-                        willChange: 'transform, opacity'
-                    }}
-                />
-            </div>
-
-        </section>
+            </section>
+        </div>
     );
 }
