@@ -183,7 +183,7 @@ export default function App() {
   return (
     <>
       {/* ── Speed lines overlay (appears when scrolling fast) ── */}
-      <div ref={speedLinesRef} style={{
+      <div ref={speedLinesRef} className="desktop-only" style={{
         position: 'fixed', inset: 0, zIndex: 3, pointerEvents: 'none', opacity: 0,
         background: 'repeating-linear-gradient(0deg, transparent 0px, transparent 3px, var(--accent) 3px, var(--accent) 4px)',
         transition: 'opacity 0.1s ease-out',
@@ -192,6 +192,7 @@ export default function App() {
       {/* ── Vertical tracer line ── */}
       <div
         ref={tracerRef}
+        className="desktop-only"
         style={{
           position: 'fixed', top: 0, left: '50%', width: 1, height: 0,
           transform: 'translateX(-50%)',
@@ -204,6 +205,7 @@ export default function App() {
       {/* Glow dot at tracer tip */}
       <div
         ref={tracerGlowRef}
+        className="desktop-only"
         style={{
           position: 'fixed', top: 0, left: '50%', width: 6, height: 6,
           transform: 'translate(-50%, -50%)',
@@ -241,6 +243,7 @@ export default function App() {
       {/* ── Crosshair Scope ── */}
       <div
         ref={crosshairRef}
+        className="desktop-only"
         style={{
           position: 'fixed', top: 0, left: 0, width: 80, height: 80,
           zIndex: 50, pointerEvents: 'none', opacity: 0,
@@ -286,27 +289,29 @@ export default function App() {
 
       {/* ── Main ── */}
       <div className="page-wrap" style={{ position: 'relative' }}>
-        {/* Decorative pellets */}
-        <MiniPellet style={{ top: '15%', left: '8%', transform: 'rotate(20deg)' }} />
-        <MiniPellet style={{ top: '22%', right: '12%', transform: 'rotate(-15deg)' }} />
-        <MiniPellet style={{ top: '35%', left: '5%', transform: 'rotate(45deg)' }} />
-        <MiniPellet style={{ top: '42%', right: '7%', transform: 'rotate(-30deg)' }} />
-        <MiniPellet style={{ top: '55%', left: '10%', transform: 'rotate(10deg)' }} />
-        <MiniPellet style={{ top: '60%', right: '15%', transform: 'rotate(-50deg)' }} />
-        <MiniPellet style={{ top: '72%', left: '6%', transform: 'rotate(35deg)' }} />
-        <MiniPellet style={{ top: '78%', right: '9%', transform: 'rotate(-20deg)' }} />
-        <MiniPellet style={{ top: '88%', left: '12%', transform: 'rotate(60deg)' }} />
-        <MiniPellet style={{ top: '92%', right: '11%', transform: 'rotate(-40deg)' }} />
+        {/* Decorative and Performance-heavy Particles (desktop only) */}
+        <div className="desktop-only">
+          <MiniPellet style={{ top: '15%', left: '8%', transform: 'rotate(20deg)' }} />
+          <MiniPellet style={{ top: '22%', right: '12%', transform: 'rotate(-15deg)' }} />
+          <MiniPellet style={{ top: '35%', left: '5%', transform: 'rotate(45deg)' }} />
+          <MiniPellet style={{ top: '42%', right: '7%', transform: 'rotate(-30deg)' }} />
+          <MiniPellet style={{ top: '55%', left: '10%', transform: 'rotate(10deg)' }} />
+          <MiniPellet style={{ top: '60%', right: '15%', transform: 'rotate(-50deg)' }} />
+          <MiniPellet style={{ top: '72%', left: '6%', transform: 'rotate(35deg)' }} />
+          <MiniPellet style={{ top: '78%', right: '9%', transform: 'rotate(-20deg)' }} />
+          <MiniPellet style={{ top: '88%', left: '12%', transform: 'rotate(60deg)' }} />
+          <MiniPellet style={{ top: '92%', right: '11%', transform: 'rotate(-40deg)' }} />
 
-        {/* Parallax floating particles at different speeds */}
-        <FloatParticle x="5%" y="30%" size={80} speed={0.05} color="var(--accent)" />
-        <FloatParticle x="85%" y="20%" size={60} speed={0.08} color="var(--accent-fire)" />
-        <FloatParticle x="15%" y="50%" size={100} speed={0.03} color="var(--accent)" />
-        <FloatParticle x="75%" y="45%" size={50} speed={0.1} color="var(--accent-fire)" />
-        <FloatParticle x="90%" y="65%" size={70} speed={0.04} color="var(--accent)" />
-        <FloatParticle x="10%" y="75%" size={40} speed={0.12} color="var(--accent-fire)" />
-        <FloatParticle x="60%" y="85%" size={90} speed={0.06} color="var(--accent)" />
-        <FloatParticle x="30%" y="15%" size={55} speed={0.07} color="var(--accent-fire)" />
+          {/* Parallax floating particles at different speeds */}
+          <FloatParticle x="5%" y="30%" size={80} speed={0.05} color="var(--accent)" />
+          <FloatParticle x="85%" y="20%" size={60} speed={0.08} color="var(--accent-fire)" />
+          <FloatParticle x="15%" y="50%" size={100} speed={0.03} color="var(--accent)" />
+          <FloatParticle x="75%" y="45%" size={50} speed={0.1} color="var(--accent-fire)" />
+          <FloatParticle x="90%" y="65%" size={70} speed={0.04} color="var(--accent)" />
+          <FloatParticle x="10%" y="75%" size={40} speed={0.12} color="var(--accent-fire)" />
+          <FloatParticle x="60%" y="85%" size={90} speed={0.06} color="var(--accent)" />
+          <FloatParticle x="30%" y="15%" size={55} speed={0.07} color="var(--accent-fire)" />
+        </div>
 
         <Hero />
         <PistolSequence />

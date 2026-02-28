@@ -15,15 +15,8 @@ export default function Hero() {
     }, []);
 
     return (
-        <section id="home" ref={ref} style={{
-            minHeight: '100vh',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            padding: '0 4rem',
-            position: 'relative'
-        }}>
-            <div style={{ maxWidth: 1200, width: '100%', display: 'flex', alignItems: 'center', gap: '4rem', flexWrap: 'wrap' }}>
+        <section id="home" ref={ref} className="hero-section">
+            <div className="hero-content">
 
                 {/* Text Content */}
                 <div style={{ flex: 1, minWidth: 300 }}>

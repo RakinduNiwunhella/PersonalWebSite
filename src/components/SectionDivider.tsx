@@ -142,7 +142,7 @@ export default function SectionDivider({ variant = 'burst', label }: Props) {
             )}
 
             {variant === 'slice' && (
-                <div style={{ width: '100%', maxWidth: 1200, padding: '0 4rem', textAlign: 'center' }}>
+                <div style={{ width: '100%', maxWidth: 1200, padding: '0 var(--pad-x)', textAlign: 'center' }}>
                     <div className="slice-line" style={{
                         height: 1,
                         background: 'linear-gradient(90deg, transparent 0%, var(--accent) 20%, var(--accent) 80%, transparent 100%)',

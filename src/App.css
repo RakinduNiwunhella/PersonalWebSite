@@ -86,6 +86,49 @@
   line-height: 1.5;
 }
 
+/* ── Hero Section Layout ── */
+.hero-section {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4rem;
+  position: relative;
+}
+
+.hero-content {
+  max-width: 1200px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 4rem;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+  .hero-section {
+    padding: 7rem 1.5rem 2rem 1.5rem;
+    /* more top padding to clear the stacked navbar */
+  }
+
+  .hero-content {
+    gap: 2rem;
+    flex-direction: column-reverse;
+    /* text below image on mobile for better flow if desired. Wait, wrap naturally puts image below if text is first. But with column-reverse, text is below image. Profile pic on top is usually better on mobile. */
+    text-align: center;
+  }
+
+  .apple-text,
+  .apple-sub {
+    text-align: center !important;
+  }
+
+  .hero-text-anim {
+    text-align: center !important;
+  }
+}
+
+
 /* Override section layout */
 .section {
   min-height: auto;

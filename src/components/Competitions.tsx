@@ -32,7 +32,7 @@ export default function Competitions() {
 
     return (
         <section className="section" id="competitions" ref={ref}>
-            <div style={{ maxWidth: 1200, margin: '0 auto', width: '100%', padding: '0 4rem' }}>
+            <div style={{ maxWidth: 1200, margin: '0 auto', width: '100%', padding: '0 var(--pad-x)' }}>
                 <div className="section-label">
                     <div className="section-label-line" />
                     <h2>Competitions</h2>
