@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Moon, Sun, Download } from 'lucide-react';
+import { Moon, Sun, Download, Menu, X } from 'lucide-react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -70,6 +70,7 @@ function FloatParticle({ x, y, size, speed, color }: { x: string; y: string; siz
 
 export default function App() {
   const [theme, setTheme] = useState<'dark' | 'light'>('dark');
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [pastHero, setPastHero] = useState(false);
   const crosshairRef = useRef<HTMLDivElement>(null);
   const tracerRef = useRef<HTMLDivElement>(null);
@@ -284,32 +285,42 @@ export default function App() {
       </div>
 
       {/* ── Navbar ── */}
-      <nav className="navbar" style={{ mixBlendMode: 'difference', color: '#fff', border: 'none', background: 'transparent', backdropFilter: 'none', WebkitBackdropFilter: 'none' }}>
+      <nav className={`navbar ${isMobileMenuOpen ? 'menu-open' : ''}`} style={{ mixBlendMode: isMobileMenuOpen ? 'normal' : 'difference', color: '#fff', border: 'none', background: isMobileMenuOpen ? '#000' : 'transparent', backdropFilter: 'none', WebkitBackdropFilter: 'none', transition: 'background 0.3s' }}>
         <span
           className="nav-logo"
           style={{
             color: '#fff',
-            opacity: pastHero ? 1 : 0,
-            transform: pastHero ? 'translateY(0)' : 'translateY(-8px)',
+            opacity: pastHero || isMobileMenuOpen ? 1 : 0,
+            transform: pastHero || isMobileMenuOpen ? 'translateY(0)' : 'translateY(-8px)',
             transition: 'opacity 0.4s ease, transform 0.4s ease',
-            pointerEvents: pastHero ? 'auto' : 'none',
+            pointerEvents: pastHero || isMobileMenuOpen ? 'auto' : 'none',
+            zIndex: 101, // Keep above the menu background
           }}
         >
           Rakindu Niwunhella
         </span>
-        <div className="nav-links">
-          <a href="#about" style={{ color: '#ccc' }}>About</a>
-          <a href="#projects" style={{ color: '#ccc' }}>Projects</a>
-          <a href="#achievements" style={{ color: '#ccc' }}>Achievements</a>
-          <a href="#leadership" style={{ color: '#ccc' }}>Leadership</a>
-          <a href="#sports" style={{ color: '#ccc' }}>Shooting</a>
-          <a href="#clubs" style={{ color: '#ccc' }}>Clubs</a>
-          <a href="#contact" style={{ color: '#ccc' }}>Contact</a>
-          <a href="/CV.pdf" download="Rakindu_Niwunhella_CV.pdf" className="cv-btn">
+        
+        <button 
+            className="mobile-menu-btn" 
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            style={{ color: '#fff', background: 'none', border: 'none', cursor: 'pointer', zIndex: 101, display: 'none' }}
+        >
+            {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
+        </button>
+
+        <div className={`nav-links ${isMobileMenuOpen ? 'open' : ''}`}>
+          <a href="#about" onClick={() => setIsMobileMenuOpen(false)} style={{ color: '#ccc' }}>About</a>
+          <a href="#projects" onClick={() => setIsMobileMenuOpen(false)} style={{ color: '#ccc' }}>Projects</a>
+          <a href="#achievements" onClick={() => setIsMobileMenuOpen(false)} style={{ color: '#ccc' }}>Achievements</a>
+          <a href="#leadership" onClick={() => setIsMobileMenuOpen(false)} style={{ color: '#ccc' }}>Leadership</a>
+          <a href="#sports" onClick={() => setIsMobileMenuOpen(false)} style={{ color: '#ccc' }}>Shooting</a>
+          <a href="#clubs" onClick={() => setIsMobileMenuOpen(false)} style={{ color: '#ccc' }}>Clubs</a>
+          <a href="#contact" onClick={() => setIsMobileMenuOpen(false)} style={{ color: '#ccc' }}>Contact</a>
+          <a href="/CV.pdf" download="Rakindu_Niwunhella_CV.pdf" className="cv-btn" onClick={() => setIsMobileMenuOpen(false)}>
             <Download size={14} strokeWidth={2.5} />
             Download CV
           </a>
-          <button className="theme-btn" onClick={() => setTheme(t => t === 'dark' ? 'light' : 'dark')} style={{ color: '#ccc' }}>
+          <button className="theme-btn" onClick={() => {setTheme(t => t === 'dark' ? 'light' : 'dark'); setIsMobileMenuOpen(false)}} style={{ color: '#ccc' }}>
             {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
           </button>
         </div>
