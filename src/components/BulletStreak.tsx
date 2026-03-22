@@ -81,7 +81,7 @@ export default function BulletStreak({ direction = 'ltr', offsetY = 0, delay = 0
             className="desktop-only"
             style={{
                 position: 'relative',
-                height: 32,
+                height: 0,
                 overflow: 'visible',
                 pointerEvents: 'none',
                 zIndex: 6,

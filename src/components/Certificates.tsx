@@ -34,9 +34,9 @@ export default function Certificates() {
                     <h2>Certificates</h2>
                 </div>
 
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1rem' }}>
+                <div className="card" style={{ display: 'flex', flexDirection: 'column', padding: '1rem 2rem' }}>
                     {certs.map((c, i) => (
-                        <div key={i} className="cert-row card" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '0.75rem' }}>
+                        <div key={i} className="cert-row" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '0.75rem', padding: '1.25rem 0', borderBottom: i < certs.length - 1 ? '1px solid var(--border)' : 'none' }}>
                             <div>
                                 <h3 style={{ fontSize: '1rem', fontWeight: 600, marginBottom: '.2rem' }}>{c.name}</h3>
                                 <p style={{ fontSize: '.875rem', color: 'var(--text-muted)' }}>{c.issuer}</p>

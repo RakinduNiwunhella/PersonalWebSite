@@ -27,17 +27,6 @@ const clubs: ClubEntry[] = [
         ],
     },
     {
-        name: 'Art Circle — Royal College',
-        highlights: [{ year: '2022', role: 'Senior Board Member' }],
-    },
-    {
-        name: 'Technologies Club — Royal College',
-        highlights: [
-            { year: '2020', role: 'Assistant Secretary', projects: 'Outbreak' },
-            { year: '2018–2019', role: 'Member' },
-        ],
-    },
-    {
         name: 'IEEE Student Branch — IIT',
         highlights: [{ year: '2024–Present', role: 'Member' }],
     },
@@ -101,7 +90,7 @@ export default function Clubs() {
                     height: 'clamp(140px, 35vw, 220px)',
                     borderRadius: 24,
                     overflow: 'hidden',
-                    marginBottom: '2rem',
+                    marginBottom: '0.75rem',
                     position: 'relative',
                 }}>
                     <img src="/demo-club.png" alt="Club Activities" style={{
@@ -145,11 +134,11 @@ export default function Clubs() {
                         {leadershipOpen && (
                             <div style={{
                                 border: '1px solid var(--border)', borderTop: 'none',
-                                borderRadius: '0 0 12px 12px', padding: '.75rem',
-                                background: 'var(--bg)', display: 'flex', flexDirection: 'column', gap: '.75rem',
+                                borderRadius: '0 0 12px 12px', padding: '0 1.5rem',
+                                background: 'var(--bg)', display: 'flex', flexDirection: 'column',
                             }}>
                                 {leadershipClubs.map((c, i) => (
-                                    <div key={i} className="club-card card">
+                                    <div key={i} className="club-card" style={{ padding: '1.25rem 0', borderBottom: i < leadershipClubs.length - 1 ? '1px solid var(--border)' : 'none' }}>
                                         <h3 style={{ fontSize: '1rem', fontWeight: 700, marginBottom: '.75rem' }}>{c.name}</h3>
                                         <div style={{ display: 'flex', flexDirection: 'column', gap: '.5rem' }}>
                                             {c.highlights.map((h, j) => (
@@ -174,10 +163,10 @@ export default function Clubs() {
                 ) : (
                     // Flat grid on desktop
                     <>
-                        <p style={{ fontSize: '.75rem', fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--accent)', marginBottom: '.75rem' }}>Leadership Roles</p>
-                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(320px, 100%), 1fr))', gap: '1.25rem', marginBottom: '2.5rem' }}>
+                        <p style={{ fontSize: '.75rem', fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--accent)', marginBottom: '.5rem' }}>Leadership Roles</p>
+                        <div className="card" style={{ display: 'flex', flexDirection: 'column', padding: '1rem 2rem', marginBottom: '0.75rem' }}>
                             {leadershipClubs.map((c, i) => (
-                                <div key={i} className="club-card card">
+                                <div key={i} className="club-card" style={{ padding: '1.5rem 0', borderBottom: i < leadershipClubs.length - 1 ? '1px solid var(--border)' : 'none' }}>
                                     <h3 style={{ fontSize: '1rem', fontWeight: 700, marginBottom: '.75rem' }}>{c.name}</h3>
                                     <div style={{ display: 'flex', flexDirection: 'column', gap: '.5rem' }}>
                                         {c.highlights.map((h, j) => (
@@ -200,11 +189,10 @@ export default function Clubs() {
                     </>
                 )}
 
-                {/* Membership */}
-                <p style={{ fontSize: '.75rem', fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--text-muted)', marginBottom: '.75rem' }}>Memberships</p>
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '.75rem' }}>
+                <p style={{ fontSize: '.75rem', fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--text-muted)', marginBottom: '.5rem' }}>Memberships</p>
+                <div className="card" style={{ padding: '1.5rem 2rem', display: 'flex', flexWrap: 'wrap', gap: '1rem' }}>
                     {(isMobile && !showAllMembers ? memberClubs.slice(0, 3) : memberClubs).map((c, i) => (
-                        <div key={i} className="club-card card" style={{ padding: '1rem 1.5rem', display: 'flex', flexDirection: 'column', gap: '.2rem' }}>
+                        <div key={i} className="club-card" style={{ padding: '0.75rem 1rem', display: 'flex', flexDirection: 'column', gap: '.2rem', background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 12 }}>
                             <span style={{ fontSize: '.9375rem', fontWeight: 600 }}>{c.name}</span>
                             <span style={{ fontSize: '.8125rem', color: 'var(--text-muted)' }}>{c.highlights.map(h => h.year).join(', ')}</span>
                         </div>

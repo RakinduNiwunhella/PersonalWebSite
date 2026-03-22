@@ -4,16 +4,21 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const entries = [
+type EduEntry = {
+    degree: string;
+    institution: string;
+    sub: string;
+    year: string;
+    marks: [string, string][];
+};
+
+const entries: EduEntry[] = [
     {
         degree: 'BSc (Hons) Computer Science',
         institution: 'Informatics Institute of Technology (IIT)',
         sub: 'Affiliated with University of Westminster, UK',
         year: '2024 – Present',
-        marks: [
-            ['Software Dev I', '98'], ['Mathematics', '98'], ['CS Fundamentals', '94'],
-            ['Software Dev II', '89'], ['Trends in CS', '78'], ['Web Design', '69'],
-        ],
+        marks: [],
     },
     {
         degree: 'Professional Certificate in Cyber Security',
@@ -41,11 +46,7 @@ const entries = [
         institution: 'Royal College',
         sub: 'All 9 subjects: A',
         year: '2019',
-        marks: [
-            ['Buddhism', 'A'], ['Sinhala Language', 'A'], ['English Language', 'A'],
-            ['Mathematics', 'A'], ['History', 'A'], ['Science', 'A'],
-            ['Drama & Theatre', 'A'], ['Business & Accounting', 'A'], ['Health & PE', 'A'],
-        ],
+        marks: [],
     },
 ];
 
@@ -70,9 +71,9 @@ export default function Education() {
                     <h2>Education</h2>
                 </div>
 
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+                <div className="card" style={{ display: 'flex', flexDirection: 'column', padding: '1rem 2rem' }}>
                     {entries.map((e, i) => (
-                        <div key={i} className="edu-entry card">
+                        <div key={i} className="edu-entry" style={{ padding: '1.5rem 0', borderBottom: i < entries.length - 1 ? '1px solid var(--border)' : 'none' }}>
                             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '1rem', flexWrap: 'wrap', marginBottom: e.marks.length ? '1.5rem' : 0 }}>
                                 <div>
                                     <h3 style={{ fontSize: '1.125rem', fontWeight: 600, marginBottom: '.25rem' }}>{e.degree}</h3>

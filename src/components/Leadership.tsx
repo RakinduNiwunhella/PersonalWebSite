@@ -12,13 +12,6 @@ const roles = [
     { role: 'Junior Steward', org: 'Royal College', year: '2021' },
     { role: 'Junior Prefect', org: 'Royal College', year: '2020' },
     { role: 'Primary Prefect', org: 'Royal College', year: '2016' },
-    { role: 'Team Captain — U21 Air Rifle Shooting', org: 'Royal College', year: '2021', img: '/demo-shooting.png' },
-    { role: 'Club Chairman', org: 'Green Circle, Royal College', year: '2022', img: '/demo-club.png' },
-    { role: 'Club Secretary', org: 'Radio Club, Royal College', year: '2022' },
-    { role: 'Club Treasurer', org: 'Radio Club, Royal College', year: '2021' },
-    { role: 'Assistant Chairman', org: 'Green Circle, Royal College', year: '2021' },
-    { role: 'Senior Board Member', org: 'Art Circle, Royal College', year: '2022' },
-    { role: 'Assistant Secretary', org: 'Technologies Club, Royal College', year: '2020' },
 ];
 
 function ImageCard({ src, alt }: { src: string; alt: string }) {
@@ -36,7 +29,7 @@ function CollapsibleGroup({
     label: string;
     accentColor: string;
     items: typeof roles;
-    renderRow: (r: typeof roles[0], i: number) => React.ReactNode;
+    renderRow: (r: typeof roles[0], i: number, arr: typeof roles) => React.ReactNode;
     defaultOpen?: boolean;
 }) {
     const [open, setOpen] = useState(defaultOpen);
@@ -46,8 +39,8 @@ function CollapsibleGroup({
         // On desktop render flat, no toggle
         return (
             <>
-                <p style={{ fontSize: '.75rem', fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: accentColor, marginBottom: '.75rem' }}>{label}</p>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(320px, 100%), 1fr))', gap: '1rem', marginBottom: '2rem' }}>
+                <p style={{ fontSize: '.75rem', fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: accentColor, marginBottom: '.5rem' }}>{label}</p>
+                <div className="card" style={{ display: 'flex', flexDirection: 'column', padding: '1rem 2rem', marginBottom: '0.5rem' }}>
                     {items.map(renderRow)}
                 </div>
             </>
@@ -90,11 +83,10 @@ function CollapsibleGroup({
                     border: '1px solid var(--border)',
                     borderTop: 'none',
                     borderRadius: '0 0 12px 12px',
-                    padding: '.75rem',
+                    padding: '1rem 1.75rem',
                     background: 'var(--bg)',
                     display: 'flex',
                     flexDirection: 'column',
-                    gap: '.75rem',
                 }}>
                     {items.map(renderRow)}
                 </div>
@@ -117,11 +109,9 @@ export default function Leadership() {
     }, []);
 
     const institutional = roles.filter(r => ['Senior Prefect', 'Senior Steward', 'Junior Steward', 'Junior Prefect', 'Primary Prefect', 'Advisory Member'].includes(r.role));
-    const sports = roles.filter(r => r.role.includes('Captain'));
-    const clubLeadership = roles.filter(r => ['Club Chairman', 'Club Secretary', 'Club Treasurer', 'Assistant Chairman', 'Senior Board Member', 'Assistant Secretary'].includes(r.role));
 
-    const renderRow = (r: typeof roles[0], i: number) => (
-        <div key={i} className="lead-row card">
+    const renderRow = (r: typeof roles[0], i: number, arr: typeof roles) => (
+        <div key={i} className="lead-row" style={{ padding: '1.25rem 0', borderBottom: i < arr.length - 1 ? '1px solid var(--border)' : 'none' }}>
             {r.img && <ImageCard src={r.img} alt={r.role} />}
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '1rem', flexWrap: 'wrap' }}>
                 <div>
@@ -142,8 +132,6 @@ export default function Leadership() {
                 </div>
 
                 <CollapsibleGroup label="Institutional Leadership" accentColor="var(--accent)" items={institutional} renderRow={renderRow} defaultOpen={true} />
-                <CollapsibleGroup label="Sports Captaincy" accentColor="var(--accent-fire)" items={sports} renderRow={renderRow} defaultOpen={true} />
-                <CollapsibleGroup label="Club & Society Leadership" accentColor="var(--accent)" items={clubLeadership} renderRow={renderRow} />
             </div>
         </section>
     );

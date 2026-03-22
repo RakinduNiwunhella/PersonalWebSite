@@ -8,7 +8,6 @@ gsap.registerPlugin(ScrollTrigger);
 const teamHistory = [
     { category: 'Under 21 – A Team', years: [{ yr: '2023', role: 'Member' }, { yr: '2022', role: 'Member' }, { yr: '2021', role: 'Captain' }] },
     { category: 'Under 18 – A Team', years: [{ yr: '2020', role: 'Member' }, { yr: '2019', role: 'Member' }, { yr: '2018', role: 'Member' }, { yr: '2017', role: 'Member' }, { yr: '2016', role: 'Member' }] },
-    { category: 'Squash – Under 13', years: [{ yr: '2016–17', role: 'Member' }] },
 ];
 
 const nationalAchievements = [
@@ -58,7 +57,7 @@ export default function Sports() {
                     height: 'clamp(180px, 40vw, 300px)',
                     borderRadius: 24,
                     overflow: 'hidden',
-                    marginBottom: '1.5rem',
+                    marginBottom: '0.75rem',
                     position: 'relative',
                 }}>
                     <img src="/demo-shooting.png" alt="Air Rifle Shooting" style={{
@@ -74,8 +73,19 @@ export default function Sports() {
                     </div>
                 </div>
 
+                {/* Captaincy Card */}
+                <div className="sport-block card" style={{ padding: '2rem', marginBottom: '0.75rem', borderRadius: 16 }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '1rem', flexWrap: 'wrap' }}>
+                        <div>
+                            <h3 style={{ fontSize: '1.0625rem', fontWeight: 600, marginBottom: '.2rem' }}> Captain - Rifle Shooting</h3>
+                            <p style={{ fontSize: '.9375rem', color: 'var(--text-muted)' }}>Royal College</p>
+                        </div>
+                        <span className="tag" style={{ whiteSpace: 'nowrap' }}>2021</span>
+                    </div>
+                </div>
+
                 {/* Colours + Team in a 2-col layout */}
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(360px, 100%), 1fr))', gap: '1.25rem', marginBottom: '1.5rem' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(360px, 100%), 1fr))', gap: '1.25rem', marginBottom: '0.75rem' }}>
                     {/* Colours */}
                     <div className="sport-block card">
                         <div style={{ display: 'flex', alignItems: 'center', gap: '.75rem', marginBottom: '1rem' }}>
@@ -91,7 +101,7 @@ export default function Sports() {
                             ))}
                         </div>
                         <p style={{ marginTop: '.75rem', fontSize: '.8125rem', color: 'var(--text-muted)', fontStyle: 'italic', borderTop: '1px solid var(--border)', paddingTop: '.75rem' }}>
-                            Basic Training: Air Rifle &amp; Air Pistol — A Grade (93%)
+                            Advanced Training: Air Rifle &amp; Air Pistol — A Grade (93%)
                         </p>
                     </div>
 
@@ -99,7 +109,7 @@ export default function Sports() {
                     <div className="sport-block card">
                         <div style={{ display: 'flex', alignItems: 'center', gap: '.75rem', marginBottom: '1rem' }}>
                             <Target size={22} color="var(--accent-fire)" />
-                            <h3 style={{ fontSize: '1.125rem', fontWeight: 700 }}>Team Representation</h3>
+                            <h3 style={{ fontSize: '1.125rem', fontWeight: 700 }}>College Shooting Team Representation</h3>
                         </div>
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                             {teamHistory.map((t, i) => (

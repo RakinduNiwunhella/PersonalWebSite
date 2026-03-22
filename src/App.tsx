@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Moon, Sun } from 'lucide-react';
+import { Moon, Sun, Download } from 'lucide-react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -303,9 +303,13 @@ export default function App() {
           <a href="#about" style={{ color: '#ccc' }}>About</a>
           <a href="#projects" style={{ color: '#ccc' }}>Projects</a>
           <a href="#achievements" style={{ color: '#ccc' }}>Achievements</a>
-          <a href="#sports" style={{ color: '#ccc' }}>Shooting</a>
           <a href="#leadership" style={{ color: '#ccc' }}>Leadership</a>
+          <a href="#sports" style={{ color: '#ccc' }}>Shooting</a>
           <a href="#clubs" style={{ color: '#ccc' }}>Clubs</a>
+          <a href="/CV.pdf" download="Rakindu_Niwunhella_CV.pdf" className="cv-btn">
+            <Download size={14} strokeWidth={2.5} />
+            Download CV
+          </a>
           <button className="theme-btn" onClick={() => setTheme(t => t === 'dark' ? 'light' : 'dark')} style={{ color: '#ccc' }}>
             {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
           </button>

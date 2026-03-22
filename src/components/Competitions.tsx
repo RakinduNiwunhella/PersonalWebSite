@@ -63,9 +63,9 @@ export default function Competitions() {
                     </div>
                 </div>
 
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                <div className="card" style={{ display: 'flex', flexDirection: 'column', padding: '1rem 2rem' }}>
                     {visible.map((c, i) => (
-                        <div key={i} className="comp-row card" style={{ display: 'flex', alignItems: 'flex-start', gap: '1.5rem' }}>
+                        <div key={i} className="comp-row" style={{ display: 'flex', alignItems: 'flex-start', gap: '1.5rem', padding: '1.25rem 0', borderBottom: i < visible.length - 1 ? '1px solid var(--border)' : 'none' }}>
                             <Trophy size={20} color="var(--accent-fire)" style={{ flexShrink: 0, marginTop: '.2rem' }} />
                             <div style={{ flex: 1 }}>
                                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '1rem', flexWrap: 'wrap', marginBottom: '.25rem' }}>

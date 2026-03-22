@@ -109,13 +109,14 @@ export default function SectionDivider({ variant = 'burst', label }: Props) {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            padding: '6rem 0',
+            padding: '0.25rem 0',
             position: 'relative',
-            overflow: 'hidden',
+            overflow: 'visible',
+            overflowX: 'hidden',
             zIndex: 5,
         }}>
             {variant === 'burst' && (
-                <div style={{ position: 'relative', width: 160, height: 160 }}>
+                <div style={{ position: 'relative', width: 160, height: 0 }}>
                     {burstParticles.map((p, i) => (
                         <div key={i} className="burst-particle" style={{
                             position: 'absolute',
@@ -184,7 +185,7 @@ export default function SectionDivider({ variant = 'burst', label }: Props) {
             )}
 
             {variant === 'shockwave' && (
-                <div style={{ position: 'relative', width: 80, height: 80 }}>
+                <div style={{ position: 'relative', width: 80, height: 0 }}>
                     {[0, 1, 2].map(i => (
                         <div key={i} className="wave" style={{
                             position: 'absolute',
