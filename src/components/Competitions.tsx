@@ -11,10 +11,6 @@ const comps = [
     { title: 'OctWave 2.0 – AI/ML Initiative', org: 'IEEE IAS SB – University of Moratuwa', year: '2025', desc: 'Participated in cross-university AI/ML collaborative program.' },
     { title: 'IEEE Xtreme Programming Competition', org: 'IEEE', year: '2025', desc: '24-hour global competitive programming challenge.' },
     { title: 'CodeRally 6.0 – 24h Hackathon', org: 'IEEE Computer Society – IIT', year: '2025', desc: 'Intermediate tier; continuous 24-hour coding marathon.' },
-    { title: '2nd Place — SLSSSA Air Rifle & Pistol Championship (U18)', org: 'SLSSSA', year: '2017', desc: 'Silver medal at the All-Island Sri Lanka Schools Air Rifle & Air Pistol Championship.' },
-    { title: '2nd Place — SLSSSA Schools Championship (U18)', org: 'SLSSSA', year: '2016', desc: 'Silver medal at the All-Island Schools Championship.' },
-    { title: '3rd Place — NSSF Air Gun Championship (Youth)', org: 'National Shooting Sport Federation', year: '2019', desc: 'Bronze medal in the open youth category at the national federation championship.' },
-    { title: '2nd Place — 5th Navy Open Shooting Championship (Youth)', org: 'Sri Lanka Navy', year: '2018', desc: 'Silver medal in the youth division of the national Navy Open.' },
 ];
 
 const MOBILE_PREVIEW = 3;
@@ -49,16 +45,17 @@ export default function Competitions() {
                     display: 'grid',
                     gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
                     gap: '1rem',
-                    marginBottom: '1.5rem',
+                    marginBottom: '0.75rem',
                 }}>
                     <div className="comp-row" style={{
                         borderRadius: 16,
                         overflow: 'hidden',
-                        height: 'clamp(120px, 30vw, 160px)',
+                        height: 'clamp(200px, 40vw, 300px)',
                         gridColumn: 'span 2',
+                        background: 'var(--bg-card)'
                     }}>
-                        <img src="/demo-trophy.png" alt="Competition Trophies" style={{
-                            width: '100%', height: '100%', objectFit: 'cover', display: 'block',
+                        <img src="/sherlock-win.jpg" alt="Sherlock 3.0 Winning Team" style={{
+                            width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 55%', display: 'block',
                         }} />
                     </div>
                 </div>

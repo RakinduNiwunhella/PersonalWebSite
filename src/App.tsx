@@ -12,13 +12,11 @@ import Projects from './components/Projects';
 import Sports from './components/Sports';
 import Leadership from './components/Leadership';
 import Clubs from './components/Clubs';
-import Community from './components/Community';
 import Certificates from './components/Certificates';
 import Competitions from './components/Competitions';
-import Skills from './components/Skills';
-import SkillsTicker from './components/SkillsTicker';
 import BulletStreak from './components/BulletStreak';
 import SectionFX from './components/SectionFX';
+import Contact from './components/Contact';
 import './App.css';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -306,6 +304,7 @@ export default function App() {
           <a href="#leadership" style={{ color: '#ccc' }}>Leadership</a>
           <a href="#sports" style={{ color: '#ccc' }}>Shooting</a>
           <a href="#clubs" style={{ color: '#ccc' }}>Clubs</a>
+          <a href="#contact" style={{ color: '#ccc' }}>Contact</a>
           <a href="/CV.pdf" download="Rakindu_Niwunhella_CV.pdf" className="cv-btn">
             <Download size={14} strokeWidth={2.5} />
             Download CV
@@ -346,7 +345,7 @@ export default function App() {
         <PistolSequence />
         <SectionFX />
 
-        <div className="content-tunnel" style={{ position: 'relative', zIndex: 10, paddingBottom: '10rem' }}>
+        <div className="content-tunnel" style={{ position: 'relative', zIndex: 10, paddingBottom: '2rem' }}>
           <About />
           <SectionDivider variant="burst" />
           <BulletStreak direction="ltr" offsetY={4} />
@@ -354,7 +353,6 @@ export default function App() {
           <SectionDivider variant="slice" label="What I've Built" />
           <BulletStreak direction="rtl" delay={0.1} />
           <Projects />
-          <SkillsTicker />
           {/* ── Achievements (Certificates + Competitions) ── */}
           <SectionDivider variant="glitch" label="ACHIEVEMENTS" />
           <BulletStreak direction="ltr" offsetY={-4} delay={0.05} />
@@ -373,11 +371,8 @@ export default function App() {
           <SectionDivider variant="shockwave" />
           <BulletStreak direction="ltr" offsetY={4} />
           <Clubs />
-          <SectionDivider variant="glitch" label="COMMUNITY" />
-          <BulletStreak direction="rtl" delay={0.06} />
-          <Community />
-          <SectionDivider variant="burst" />
-          <Skills />
+          <SectionDivider variant="slice" label="Let's connect" />
+          <Contact />
         </div>
 
         <footer style={{ padding: 'clamp(3rem, 8vw, 6rem) 0', textAlign: 'center', borderTop: '1px solid var(--border)', color: 'var(--text-muted)', fontSize: '1rem', fontWeight: 500 }}>

@@ -87,14 +87,14 @@ export default function Clubs() {
                 {/* Club Activities banner */}
                 <div className="club-card" style={{
                     width: '100%',
-                    height: 'clamp(140px, 35vw, 220px)',
+                    height: 'clamp(180px, 40vw, 300px)',
                     borderRadius: 24,
                     overflow: 'hidden',
                     marginBottom: '0.75rem',
                     position: 'relative',
                 }}>
-                    <img src="/demo-club.png" alt="Club Activities" style={{
-                        width: '100%', height: '100%', objectFit: 'cover', display: 'block',
+                    <img src="/clubs-banner.jpg" alt="Club Activities" style={{
+                        width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 30%', display: 'block',
                     }} />
                     <div style={{
                         position: 'absolute', bottom: 0, left: 0, right: 0,

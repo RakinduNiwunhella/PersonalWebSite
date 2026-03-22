@@ -7,7 +7,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 const roles = [
     { role: 'Advisory Member', org: 'Air Rifle Shooting Advisory & Management Committee, Royal College Union', year: '2025 – Present' },
-    { role: 'Senior Prefect', org: 'Royal College', year: '2023/24', img: '/demo-prefect.png' },
+    { role: 'Senior Prefect', org: 'Royal College', year: '2023/24' },
     { role: 'Senior Steward', org: 'Royal College', year: '2022' },
     { role: 'Junior Steward', org: 'Royal College', year: '2021' },
     { role: 'Junior Prefect', org: 'Royal College', year: '2020' },
@@ -129,6 +129,25 @@ export default function Leadership() {
                 <div className="section-label">
                     <div className="section-label-line" />
                     <h2>Leadership</h2>
+                </div>
+
+                <div style={{
+                    display: 'grid',
+                    gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+                    gap: '1rem',
+                    marginBottom: '0.75rem',
+                }}>
+                    <div className="lead-row" style={{
+                        borderRadius: 16,
+                        overflow: 'hidden',
+                        height: 'clamp(200px, 40vw, 300px)',
+                        gridColumn: 'span 2',
+                        background: 'var(--bg-card)'
+                    }}>
+                        <img src="/leadership-banner.jpg" alt="Leadership Activity" style={{
+                            width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 40%', display: 'block',
+                        }} />
+                    </div>
                 </div>
 
                 <CollapsibleGroup label="Institutional Leadership" accentColor="var(--accent)" items={institutional} renderRow={renderRow} defaultOpen={true} />

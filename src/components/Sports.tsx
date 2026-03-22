@@ -60,8 +60,8 @@ export default function Sports() {
                     marginBottom: '0.75rem',
                     position: 'relative',
                 }}>
-                    <img src="/demo-shooting.png" alt="Air Rifle Shooting" style={{
-                        width: '100%', height: '100%', objectFit: 'cover', display: 'block',
+                    <img src="/sports-banner.png" alt="Air Rifle Shooting Championship" style={{
+                        width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 30%', display: 'block',
                     }} />
                     <div style={{
                         position: 'absolute', bottom: 0, left: 0, right: 0,
